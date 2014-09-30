@@ -77,6 +77,9 @@
 #include <asm/sections.h>
 #include <asm/cacheflush.h>
 
+#include <linux/reboot.h>
+#include <asm-generic/emergency-restart.h>
+
 #ifdef CONFIG_X86_LOCAL_APIC
 #include <asm/smp.h>
 #endif
@@ -862,6 +865,7 @@ static int __init kernel_init(void * unused)
 	 * init can run on any cpu.
 	 */
 	set_cpus_allowed_ptr(current, cpu_all_mask);
+	
 
 	cad_pid = task_pid(current);
 

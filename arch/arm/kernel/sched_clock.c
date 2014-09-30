@@ -95,7 +95,8 @@ static void notrace update_sched_clock(void)
 static void sched_clock_poll(unsigned long wrap_ticks)
 {
 	mod_timer(&sched_clock_timer, round_jiffies(jiffies + wrap_ticks));
-	update_sched_clock();
+	//update_sched_clock();
+	if(update_sched_clock) update_sched_clock();
 }
 
 void __init setup_sched_clock(u32 (*read)(void), int bits, unsigned long rate)
