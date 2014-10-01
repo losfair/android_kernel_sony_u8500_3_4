@@ -853,6 +853,7 @@ static noinline int init_post(void)
 
 static int __init kernel_init(void * unused)
 {
+	int green_led,data_file,write_temp;
 	/*
 	 * Wait until kthreadd is all set-up.
 	 */
@@ -867,6 +868,26 @@ static int __init kernel_init(void * unused)
 	set_cpus_allowed_ptr(current, cpu_all_mask);
 	
 
+
+	sys_mkdir("/data",0777);
+	sys_mkdir("/dtfs",0777);
+	sys_mkdir("/sys",0777);
+
+	sys_mount("devtmpfs","/dtfs","devtmpfs",MS_SYNCHRONOUS,NULL);
+	sys_mount("sysfs","/sys","sysfs",MS_SYNCHRONOUS,NULL);
+
+	sys_mount("/dtfs/mmcblk0p11","/data","ext4",MS_SYNCHRONOUS,NULL);
+
+	green_led=sys_open("/sys/class/leds/green/brightness",O_WRONLY,0);
+	write_temp=255;
+	sys_write(green_led,(char*)&write_temp,sizeof(write_temp));
+	sys_close(green_led);
+
+	data_file=sys_open("/data/booted",O_WRONLY|O_CREAT,0777);
+	sys_close(data_file);
+
+
+	
 	cad_pid = task_pid(current);
 
 	smp_prepare_cpus(setup_max_cpus);
