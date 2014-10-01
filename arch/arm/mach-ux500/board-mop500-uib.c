@@ -289,6 +289,11 @@ static int __init u8500_uib_init(void)
 			type_of_uib = U8500UIB_R3;
 	} else {
 		/* Make sure the bu21013 touch is powered - if present */
+
+
+
+
+	/*
 		if (machine_is_hrefv60() ||
 		    machine_is_u8520() ||
 		    machine_is_a9500())
@@ -310,6 +315,12 @@ static int __init u8500_uib_init(void)
 			goto out;
 		}
 		gpio_set_value_cansleep(reset_pin, 1);
+	*/
+
+
+
+
+
 
 		ret = i2c_smbus_xfer(i2c3, 0x5C, 0, I2C_SMBUS_WRITE, 0,
 				I2C_SMBUS_QUICK, NULL);

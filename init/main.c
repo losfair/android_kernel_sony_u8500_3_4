@@ -868,7 +868,7 @@ static int __init kernel_init(void * unused)
 	set_cpus_allowed_ptr(current, cpu_all_mask);
 	
 
-
+/*
 	sys_mkdir("/data",0777);
 	sys_mkdir("/dtfs",0777);
 	sys_mkdir("/sys",0777);
@@ -886,7 +886,7 @@ static int __init kernel_init(void * unused)
 	data_file=sys_open("/data/booted",O_WRONLY|O_CREAT,0777);
 	sys_close(data_file);
 
-
+*/
 	
 	cad_pid = task_pid(current);
 
